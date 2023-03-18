@@ -1,10 +1,10 @@
 #bin/bash/
 
 
-hostname > HOSTNAME
+hostname > $HOSTNAME
 echo "HOSTNAME $HOSTNAME"
 # TIMEZONE = временная зона в виде: America/New_York UTC -5 (временная зона, должна браться из системы и быть корректной для текущего местоположения)
-whoami > USER
+whoami > $USER
 echo "USER $USER"
 # OS = тип и версия операционной системы
 # DATE = текущее время в виде: 12 May 2020 12:24:36
