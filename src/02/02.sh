@@ -1,6 +1,12 @@
 #bin/bash/
 
-info {
+info() {
+    # echo "$(lsof -a -p $$ -d 0,1,2)"
+if [ -n "$1" ]
+then
+    exec 1>$1
+fi
+
 echo "HOSTNAME = $(hostname)"
 echo "TIMEZONE = $(timedatectl | grep zone | awk '{print $3}')"
 echo "USER = $(whoami)"
@@ -17,5 +23,9 @@ echo "RAM_FREE = $(free | grep "Mem" | awk '{printf "%.3f GB\n", $4 / 1024 / 102
 echo "SPACE_ROOT = $(df / -m | awk '{if (NR == 2) printf "%.2f MB\n", $2}')"
 echo "SPACE_ROOT_USED = $(df / -m | awk '{if (NR == 2) printf "%.2f MB\n", $3}')"
 echo "SPACE_ROOT_FREE = $(df / -m | awk '{if (NR == 2) printf "%.2f MB\n", $4}')"
+
+exec 1>/dev/tty
 }
-info 
+
+# info log.txt
+# info
