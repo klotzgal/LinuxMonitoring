@@ -1,15 +1,17 @@
 #bin/bash/
 
 
-hostname > $HOSTNAME
-echo "HOSTNAME $HOSTNAME"
+# i=$(hostname)
+echo "HOSTNAME = $(hostname)"
 # TIMEZONE = временная зона в виде: America/New_York UTC -5 (временная зона, должна браться из системы и быть корректной для текущего местоположения)
-whoami > $USER
-echo "USER $USER"
-# OS = тип и версия операционной системы
-# DATE = текущее время в виде: 12 May 2020 12:24:36
-date "+ %Y-%m-%d %H:%M:%S"
-# UPTIME = время работы системы
+echo "USER = $(whoami)"
+echo "OS = $(uname -sr)"
+# тип и версия операционной системы
+echo "DATE = $(date "+%d %B %Y %H:%M:%S")"
+# текущее время в виде: 12 May 2020 12:24:36
+
+echo "UPTIME = $(uptime | cut -d ' ' -f 4,5,7 | sed 's/,//g')"
+# время работы системы
 # UPTIME_SEC = время работы системы в секундах
 # IP = ip-адрес машины в любом из сетевых интерфейсов
 # MASK = сетевая маска любого из сетевых интерфейсов в виде: xxx.xxx.xxx.xxx
