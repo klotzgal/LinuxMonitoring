@@ -28,22 +28,22 @@ color() {
 
 info() {
 
-printf "$(color $1 $2)HOSTNAME =${end}$(color $3 $4)$(hostname)${end}\n"
-printf "$(color $1 $2)TIMEZONE =${end}$(color $3 $4)$(timedatectl | grep zone | awk '{print $3}')${end}\n"
-printf "$(color $1 $2)USER =${end}$(color $3 $4)$(whoami)${end}\n"
-printf "$(color $1 $2)OS =${end}$(color $3 $4)$(uname -sr)${end}\n" 
-printf "$(color $1 $2)DATE =${end}$(color $3 $4)$(date "+%d %B %Y %H:%M:%S")${end}\n" 
-printf "$(color $1 $2)UPTIME =${end}$(color $3 $4)$(uptime -p)${end}\n"
-printf "$(color $1 $2)UPTIME_SEC =${end}$(color $3 $4)$(cat /proc/uptime | awk '{print $1}')${end}\n" 
-printf "$(color $1 $2)IP =${end}$(color $3 $4)$(ifconfig | grep "inet " | awk '{if (NR == 1)  print $2}')${end}\n"
-printf "$(color $1 $2)MASK =${end}$(color $3 $4)$(ifconfig | grep "netmask" | awk '{if (NR == 1) print $4}')${end}\n"
-printf "$(color $1 $2)GATEWAY =${end}$(color $3 $4)$(ip r | awk '{if (NR == 1) print $3}')"
-printf "$(color $1 $2)RAM_TOTAL =${end}$(color $3 $4)$(free | grep "Mem" | awk '{printf "%.3f GB\n", $2 / 1024 / 1024}')${end}\n"
-printf "$(color $1 $2)RAM_USED =${end}$(color $3 $4)$(free | grep "Mem" | awk '{printf "%.3f GB\n", $3 / 1024 / 1024}')${end}\n"
-printf "$(color $1 $2)RAM_FREE =${end}$(color $3 $4)$(free | grep "Mem" | awk '{printf "%.3f GB\n", $4 / 1024 / 1024}')${end}\n"
-printf "$(color $1 $2)SPACE_ROOT =${end}$(color $3 $4)$(df / -m | awk '{if (NR == 2) printf "%.2f MB\n", $2}')${end}\n"
-printf "$(color $1 $2)SPACE_ROOT_USED =${end}$(color $3 $4)$(df / -m | awk '{if (NR == 2) printf "%.2f MB\n", $3}')${end}\n"
-printf "$(color $1 $2)SPACE_ROOT_FREE =${end}$(color $3 $4)$(df / -m | awk '{if (NR == 2) printf "%.2f MB\n", $4}')${end}\n"
+printf "$(color $1 $2)HOSTNAME =${end} $(color $3 $4)$(hostname)${end}\n"
+printf "$(color $1 $2)TIMEZONE =${end} $(color $3 $4)$(timedatectl | grep zone | awk '{print $3}')${end}\n"
+printf "$(color $1 $2)USER =${end} $(color $3 $4)$(whoami)${end}\n"
+printf "$(color $1 $2)OS =${end} $(color $3 $4)$(uname -sr)${end}\n" 
+printf "$(color $1 $2)DATE =${end} $(color $3 $4)$(date "+%d %B %Y %H:%M:%S")${end}\n" 
+printf "$(color $1 $2)UPTIME =${end} $(color $3 $4)$(uptime -p)${end}\n"
+printf "$(color $1 $2)UPTIME_SEC =${end} $(color $3 $4)$(cat /proc/uptime | awk '{print $1}')${end}\n" 
+printf "$(color $1 $2)IP =${end} $(color $3 $4)$(ifconfig | grep "inet " | awk '{if (NR == 1)  print $2}')${end}\n"
+printf "$(color $1 $2)MASK =${end} $(color $3 $4)$(ifconfig | grep "netmask" | awk '{if (NR == 1) print $4}')${end}\n"
+printf "$(color $1 $2)GATEWAY =${end} $(color $3 $4)$(ip r | awk '{if (NR == 1) print $3}')${end}\n"
+printf "$(color $1 $2)RAM_TOTAL =${end} $(color $3 $4)$(free | grep "Mem" | awk '{printf "%.3f GB\n", $2 / 1024 / 1024}')${end}\n"
+printf "$(color $1 $2)RAM_USED =${end} $(color $3 $4)$(free | grep "Mem" | awk '{printf "%.3f GB\n", $3 / 1024 / 1024}')${end}\n"
+printf "$(color $1 $2)RAM_FREE =${end} $(color $3 $4)$(free | grep "Mem" | awk '{printf "%.3f GB\n", $4 / 1024 / 1024}')${end}\n"
+printf "$(color $1 $2)SPACE_ROOT =${end} $(color $3 $4)$(df / -m | awk '{if (NR == 2) printf "%.2f MB\n", $2}')${end}\n"
+printf "$(color $1 $2)SPACE_ROOT_USED =${end} $(color $3 $4)$(df / -m | awk '{if (NR == 2) printf "%.2f MB\n", $3}')${end}\n"
+printf "$(color $1 $2)SPACE_ROOT_FREE =${end} $(color $3 $4)$(df / -m | awk '{if (NR == 2) printf "%.2f MB\n", $4}')${end}\n"
 
 }
 
