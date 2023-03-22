@@ -3,16 +3,12 @@
 
 # i=$(hostname)
 echo "HOSTNAME = $(hostname)"
-# TIMEZONE = временная зона в виде: America/New_York UTC -5 (временная зона, должна браться из системы и быть корректной для текущего местоположения)
+echo "TIMEZONE = $(timedatectl | grep zone | awk '{print $3}')"
 echo "USER = $(whoami)"
-echo "OS = $(uname -sr)"
-# тип и версия операционной системы
-echo "DATE = $(date "+%d %B %Y %H:%M:%S")"
-# текущее время в виде: 12 May 2020 12:24:36
-
-echo "UPTIME = $(uptime | cut -d ' ' -f 4,5,7 | sed 's/,//g')"
-# время работы системы
-# UPTIME_SEC = время работы системы в секундах
+echo "OS = $(uname -sr)" 
+echo "DATE = $(date "+%d %B %Y %H:%M:%S")" 
+echo "UPTIME = $(uptime -p)"
+echo "UPTIME_SEC = $(cat /proc/uptime | awk '{print $1}')" 
 # IP = ip-адрес машины в любом из сетевых интерфейсов
 # MASK = сетевая маска любого из сетевых интерфейсов в виде: xxx.xxx.xxx.xxx
 # GATEWAY = ip шлюза по умолчанию
