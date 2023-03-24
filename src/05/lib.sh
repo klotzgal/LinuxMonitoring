@@ -1,8 +1,13 @@
 #bin/bash/
 
 # dir="/Users/klotzgal/Desktop/kl/LinuxMonitoring/"
-dir="/var/log/"
 
+if [ -n "$1" ]
+then
+    dir=$1
+else
+    dir="/var/log/"
+fi
 
 
 total_folders="$(find $dir -type d | wc | awk '{print $1}')"
