@@ -35,20 +35,31 @@ echo "Log files (with the extension .log) = $log_count"
 echo "Archive files = $arc_count"
 echo "Symbolic links = $link_count"
 
+echo "TOP 10 files of maximum size arranged in descending order (path, size and type):"
 
 top_files=$(find $dir -type f -printf '%p %s\n' | sort -rh | head -n 10)
 path=$($top_files | awk '{print $1}')
 size=$($top_files | awk '{print $2}')
 type=$($path | awk -F . '{if (NF>1) {print $NF}}')
 
+count=1
+while read -r str
+do
+    path=$($str | awk '{print $1}')
+    size=$($str | awk '{print $2}')
+    type=$($str | awk -F . '{if (NF>1) {print $NF}}')
+
+    echo "count - $path, $size, $type"
+    count=$[$count + 1]
+done <<< $top_files
 
 
 
 
-echo "TOP 10 files of maximum size arranged in descending order (path, size and type):"
+
 echo ""
 echo ""
-echo "$size  $path  $type"
+echo "$top_files"
 echo ""
 echo ""
 echo "TOP 10 executable files of the maximum size arranged in descending order (path, size and MD5 hash of file)"
