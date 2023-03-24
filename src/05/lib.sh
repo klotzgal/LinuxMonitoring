@@ -45,9 +45,9 @@ type=$($path | awk -F . '{if (NF>1) {print $NF}}')
 count=1
 while read -r str
 do
-    path=$($str | awk '{print $1}')
-    size=$($str | awk '{print $2}')
-    type=$($str | awk -F . '{if (NF>1) {print $NF}}')
+    path=$(echo "$str" | awk '{print $1}')
+    size=$(echo "$str" | awk '{print $2}')
+    type=$(echo "$str" | awk -F . '{if (NF>1) {print $NF}}')
 
     echo "count - $path, $size, $type"
     count=$[$count + 1]
