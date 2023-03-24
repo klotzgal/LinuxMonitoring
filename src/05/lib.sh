@@ -38,20 +38,17 @@ echo "Symbolic links = $link_count"
 echo "TOP 10 files of maximum size arranged in descending order (path, size and type):"
 
 top_files=$(find $dir -type f -printf '%p %s\n' | sort -rh | head -n 10)
-path=$($top_files | awk '{print $1}')
-size=$($top_files | awk '{print $2}')
-type=$($path | awk -F . '{if (NF>1) {print $NF}}')
+
 
 count=1
-while read -r str
+while read -r str <<< "$top_files"
 do
     path=$(echo "$str" | awk '{print $1}')
     size=$(echo "$str" | awk '{print $2}')
     type=$(echo "$str" | awk -F . '{if (NF>1) {print $NF}}')
-
-    echo "count - $path, $size, $type"
+    echo "$count - $path, $size, $type"
     count=$[$count + 1]
-done <<< $top_files
+done 
 
 
 
