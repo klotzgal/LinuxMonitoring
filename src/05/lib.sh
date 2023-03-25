@@ -1,22 +1,28 @@
 #bin/bash/
 
 
-if [[ -z $1 ]]; then
-echo "Error. Enter the pathto the directory"
-exit 1
+if [[ -z $1 ]]
+then
+    echo "Error. Enter the path to the directory"
+    exit 1
 fi
 
-if [[ ! -d $1 ]]; then
-echo "Error: No such file or directory"
-exit 1
+if [[ ! -d $1 ]]
+then
+    echo "Error: No such file or directory"
+    exit 1
 fi
 
 dir=$1
-if [[ ${dir: -1} != '/' ]]; then
+if [[ ${dir: -1} != '/' ]]
+then
     dir="$dir/"
 fi
 
-
+if [ $dir = "/" ]
+then 
+    dir="$dir/"
+fi
 
 start_time=$(date +"%S.%2N")
 
