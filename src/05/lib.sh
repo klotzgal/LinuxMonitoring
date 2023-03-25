@@ -37,30 +37,16 @@ echo "Symbolic links = $link_count"
 
 echo "TOP 10 files of maximum size arranged in descending order (path, size and type):"
 
-top_files=$(find $dir -type f -printf '%p %s\n' | sort -rh | head -n 10)
-
-
-count=1
-while read -r str <<< "$top_files"
-do
-    path=$(echo "$str" | awk '{print $1}')
-    size=$(echo "$str" | awk '{print $2}')
-    type=$(echo "$str" | awk -F . '{if (NF>1) {print $NF}}')
-    echo "$count - $path, $size, $type"
-    count=$[$count + 1]
-done 
-
-
-
-
-
-echo ""
-echo ""
+top_files=$(find ${dir%?} -type f -exec du -h {} \; | sort -rh | awk -F . '{if (NF>1) {print $0" "$NF} else {print $0" - "}}' | awk '{print NR" - "$2", "$3", "$1}' | head -n 10 | column -t)
 echo "$top_files"
+
+
 echo ""
 echo ""
 echo "TOP 10 executable files of the maximum size arranged in descending order (path, size and MD5 hash of file)"
 echo ""
+top_exe=$(find ${dir%?} -type f -executable -exec du -h {} \; | sort -rh | awk -F . '{if (NF>1) {print $0" "$NF} else {print $0" - "}}' | awk '{print NR" - "$2", "$3", "$1}' | head -n 10 | column -t)
+echo "$top_exe"
 echo "Script execution time (in seconds) = "
 
 
