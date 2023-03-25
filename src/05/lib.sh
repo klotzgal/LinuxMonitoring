@@ -21,7 +21,7 @@ echo "$top_5"
 
 conf_count="$(find $dir -type f -name "*.conf" | wc | awk '{print $1}')"
 text_count="$(find $dir -type f -name "*.txt" | wc | awk '{print $1}')"
-exe_count="$(find $dir -type f -executable | wc | awk '{print $1}')"
+exe_count="$(find $dir -executable -type f  | wc | awk '{print $1}')"
 log_count="$(find $dir -type f -name "*.log" | wc | awk '{print $1}')"
 arc_count="$(find $dir -type f -name "*.zip" | wc | awk '{print $1}')"
 link_count="$(find $dir -type l | wc | awk '{print $1}')"
@@ -45,8 +45,13 @@ echo ""
 echo ""
 echo "TOP 10 executable files of the maximum size arranged in descending order (path, size and MD5 hash of file)"
 echo ""
-top_exe=$(find ${dir%?} -type f -executable -exec du -h {} \; | sort -rh | awk -F . '{if (NF>1) {print $0" "$NF} else {print $0" - "}}' | awk '{print NR" - "$2", "$3", "$1}' | head -n 10 | column -t)
+top_exe=$(find ${dir%?} -type f -executable | xargs du -h | sort -rh | head -n 10)
+md5=$(echo "$top_exe") | awk '{print $2}' | xargs md5sum | awk '{print $1}'
+paste $top_exe $md5 | awk '{print $1" "$2}'
+
+
 echo "$top_exe"
+echo "$md5"
 echo "Script execution time (in seconds) = "
 
 
