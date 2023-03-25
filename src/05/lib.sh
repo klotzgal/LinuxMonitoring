@@ -1,14 +1,24 @@
 #bin/bash/
 
-# dir="/Users/klotzgal/Desktop/kl/LinuxMonitoring/"
 
-if [ -n "$1" ]
-then
-    dir=$1
-else
-    dir="../../"
+if [[ -z $1 ]]; then
+echo "Error. Enter the pathto the directory"
+exit 1
 fi
 
+if [[ ! -d $1 ]]; then
+echo "Error: No such file or directory"
+exit 1
+fi
+
+dir=$1
+if [[ ${dir: -1} != '/' ]]; then
+    dir="$dir/"
+fi
+
+
+
+start_time=$(date +"%s.%2N")
 
 total_folders="$(find $dir -type d | wc | awk '{print $1}')"
 total_files="$(find $dir -type f | wc | awk '{print $1}')"
@@ -47,4 +57,4 @@ res="$(for file in $top_exe;do
     count=$[$count + 1]
 done)"
 echo "$(echo "$res" | column -ts "|" | column -t )"
-echo "Script execution time (in seconds) = "
+echo "Script execution time (in seconds) = $[$start_time - $(date +"%s.%2N")]"
