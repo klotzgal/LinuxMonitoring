@@ -6,7 +6,7 @@ if [ -n "$1" ]
 then
     dir=$1
 else
-    dir="/var/log/"
+    dir="../../"
 fi
 
 
@@ -45,20 +45,27 @@ echo ""
 echo ""
 echo "TOP 10 executable files of the maximum size arranged in descending order (path, size and MD5 hash of file)"
 echo ""
-top_exe=$(find ${dir%?} -type f -executable | xargs du -h | sort -rh | head -n 10)
-md5=$(echo "$top_exe") | awk '{print $2}' | xargs md5sum | awk '{print $1}'
-paste $top_exe $md5 | awk '{print $1" "$2}'
+top_exe=$(find ${dir%?} -type f -executable | xargs  du -h | sort -rh | head -n 10| awk '{print $2}' | xargs)
+count=1
+for file in top_exe
+do 
+    echo "$count - $file, $(du -h $file | awk '{print $1}'), $(md5sum $file)"
+    coint+=1
+done
 
 
 echo "$top_exe"
 echo "$md5"
 echo "Script execution time (in seconds) = "
 
+# find .. -type f -executable | xargs  du -h | sort -rh | head -n 10| awk '{print $2}' |for i in xargs; do echo "$($i du -h), $($i md5sum)"; done 
 
-
-
+find .. -type f -executable | xargs  du -h | sort -rh | head -n 10| awk '{print $2}' | xargs
 
 # find ".." -type f -printf '%p %s\n' | sort -rh | head -n 10 | awk '{print NR " - " $1" " $2 }' | awk -F . '{if (NF>1) {print $NF}}'
 
 
 
+
+
+# $(find ${dir%?} -type f -executable | xargs du -h | sort -rh | head -n 10)
